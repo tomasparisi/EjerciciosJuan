@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EEjericico JavaScript</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#welcomeMessage {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Ingrese sus datos personales</h2>
+        <form id="userForm">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="surname">Apellido:</label>
+            <input type="text" id="surname" name="surname" required>
+            
+            <label for="birthdate">Fecha de Nacimiento:</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+            
+            <label for="city">Ciudad:</label>
+            <input type="text" id="city" name="city" required>
+            
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="welcomeMessage"></div>
+    </div>
+    <script>
+document.getElementById('userForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const surname = document.getElementById('surname').value;
+    const birthdate = document.getElementById('birthdate').value;
+    const city = document.getElementById('city').value;
+    
+    const welcomeMessage = `¡Bienvenido, ${name} ${surname} de ${city}!`;
+    
+    const birthDateObj = new Date(birthdate);
+    const today = new Date();
+    const diffTime = Math.abs(today - birthDateObj);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    const livedDaysMessage = `Has vivido aproximadamente ${diffDays} días.`;
+    
+    document.getElementById('welcomeMessage').innerHTML = `
+        <p>${welcomeMessage}</p>
+        <p>${livedDaysMessage}</p>
+    `;
+});
+
+    </script>
+</body>
+</html>
